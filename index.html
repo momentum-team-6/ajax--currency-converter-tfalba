@@ -6,38 +6,34 @@
   <title>Currency Converter</title>
   <link rel="stylesheet" href="style.css">
   <script src="base-usd.js"></script>
-  <script src="script.js" async></script>
+  <script src="script.js" defer async></script>
 </head>
 <body>
   <h1>Currency Converter</h1>
   <div class="container" id="container-display">
-    <div class="form" id="form-input">
       <form id="form-currency">
         <div class="input-field" id="base-currency">
-          <label for="currency">Base Currency</label>
-          <select id="base" name="base">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="fiat">Fiat</option>
-            <option value="audi">Audi</option>
-          </select>
+          Base Currency
+          <select id="base-choice" name="base"></select>
         </div>
         <div class="input-field" id="final-currency">
-          <label for="currency">Final Currency</label>
-          <select id="final" name="final">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="fiat">Fiat</option>
-            <option value="audi">Audi</option>
-          </select>         
+          Final Currency
+          <select id="final-choice" name="final"></select>         
         </div>
-        <div class="input-field">
+        <div class="output-field" id="base-amount-field">
+          <label for="currency amount">Amount to Convert</label>
+          <input id="base-amount" type="text" required>
+        </div>
+        <div class="output-field" id="holder">
+          Result
+        </div>
+        <div class="output-field">
           <button id="submit-button" type="submit">Convert</button>
         </div>
-
       </form>
-    </div>
   </div>
 
 </body>
 </html>
+
+

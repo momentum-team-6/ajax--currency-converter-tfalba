@@ -34,11 +34,35 @@ const currencies = [
   'MYR'
 ]
 
-const base = document.querySelector('#base')
-const final = document.querySelector('#final')
+const baseChoice = document.querySelector('#base-choice')
+const finalChoice = document.querySelector('#final-choice')
 const form = document.querySelector('#form-currency')
+const amountField = document.querySelector('#base-amount-field')
+const outputAmt = document.querySelector('#holder')
+const amount = document.querySelector('#base-amount')
 
-for let (currency of currencies) {
-  // somehow write to the DOM the above currencies into the dropdown menu input of the form
+const outputAmtDiv = document.createElement('div')
 
+document.querySelector('#holder').appendChild(outputAmtDiv)
+
+for (let currency of currencies) {
+  baseChoice.innerHTML = baseChoice.innerHTML += `<option>${currency}</option>`
+  finalChoice.innerHTML = finalChoice.innerHTML += ` <option>${currency}</option>`
 }
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*          This works below for reading from const=baseUSD. Now need to do the fetch based on base.value as          */
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*                        input to the url and pull in whichever thing for const and then pull                        */
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+outputAmtDiv.classList.add('output')
+form.addEventListener('submit', function (event) {
+  event.preventDefault()
+  let newCurrency = finalChoice.value
+  let convertAmount = amount.value*baseUSD.rates[newCurrency]
+  outputAmtDiv.innerHTML = convertAmount
+})
+
