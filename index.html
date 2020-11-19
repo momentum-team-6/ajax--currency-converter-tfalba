@@ -12,27 +12,35 @@
   <h1>Currency Converter</h1>
   <div class="container" id="container-display">
       <form id="form-currency">
-        <div class="input-field" id="base-currency">
-          Base Currency
-          <select id="base-choice" name="base"></select>
+        <div class="row row1">
+          <div class="input-field" id="base-currency">
+            Base Currency
+            <select id="base-choice" name="base"></select>
+          </div>
+          <div class="input-field" id="final-currency">
+            Final Currency
+            <select id="final-choice" name="final"></select>         
+          </div>
         </div>
-        <div class="input-field" id="final-currency">
-          Final Currency
-          <select id="final-choice" name="final"></select>         
-        </div>
-        <div class="output-field" id="base-amount-field">
-          <label for="currency amount">Amount to Convert</label>
-          <input id="base-amount" type="text" required>
-        </div>
-        <div class="output-field" id="holder">
-          Result
-        </div>
-        <div class="output-field">
-          <button id="submit-button" type="submit">Convert</button>
+        <div class="row row2">
+          <div class="output-field" id="base-amount-field">
+            <label for="currency amount">Amount to Convert</label>
+            <input id="base-amount" type="text" required>
+          </div>
+          <div class="output-field">
+            Result
+            <div id="holder">
+
+            </div>
+          </div>
+          <div class="output-field">
+            <button id="submit-button" type="submit">Convert</button>
+          </div>
         </div>
       </form>
   </div>
-
+  <footer>Exchange Rates based on Today's Date</footer>
+  
 </body>
 </html>
 

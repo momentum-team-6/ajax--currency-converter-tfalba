@@ -61,8 +61,18 @@ for (let currency of currencies) {
 outputAmtDiv.classList.add('output')
 form.addEventListener('submit', function (event) {
   event.preventDefault()
+
   let newCurrency = finalChoice.value
-  let convertAmount = amount.value*baseUSD.rates[newCurrency]
+  let convertAmount = parseFloat(amount.value*baseUSD.rates[newCurrency].toFixed(2))
   outputAmtDiv.innerHTML = convertAmount
+
+let url = 'https://api.exchangeratesapi.io/latest?base=USD'
+fetch(url).then(res => res.json())
+.then(data => {
+  console.log('hello my arrow function')
+  outputAmtDiv.innerHTML=`<h1>${data.rates[newCurrency]}</h1>`
+  return data.repos_url
+})
+
 })
 
