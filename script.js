@@ -34,34 +34,46 @@ const currencies = [
   'MYR'
 ]
 
+/* -------------------------------------- Set constants for elements to work on ------------------------------------- */
+
 const baseChoice = document.querySelector('#base-choice')
 const finalChoice = document.querySelector('#final-choice')
 const form = document.querySelector('#form-currency')
-// const amountField = document.querySelector('#base-amount-field')
-
 const amount = document.querySelector('#base-amount')
-
-// const outputAmt = document.querySelector('#holder')
-const outputAmtDiv = document.createElement('div')
-document.querySelector('#holder').appendChild(outputAmtDiv)
-
+const outputAmt = document.querySelector('#holder')
 const baseType = document.querySelector('#base-currency-type')
 const finalType = document.querySelector('#final-currency-type')
 const footer = document.querySelector('#footer-text')
+
+/* --------------- Set the base currencies into select field and get options for final rate exchanges --------------- */
+
 for (let currency of currencies) {
   baseChoice.innerHTML = baseChoice.innerHTML += `<option>${currency}</option>`
-  finalChoice.innerHTML = finalChoice.innerHTML += ` <option>${currency}</option>`
 }
+finalChoice.innerHTML = baseChoice.innerHTML
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-/*          This works below for reading from const=baseUSD. Now need to do the fetch based on base.value as          */
+/*                                   Event listener #1 for setting final rate types                                   */
 /* ------------------------------------------------------------------------------------------------------------------ */
 
+baseChoice.addEventListener('change', function (event) {
+  const baseCurrency = baseChoice.value
+
+  const url = `https://api.exchangeratesapi.io/latest?base=${baseCurrency}`
+  fetch(url).then(res => res.json())
+    .then(data => {
+      const exchangeRates = Object.keys(data.rates)
+      finalChoice.innerHTML = ''
+      for (let rate of exchangeRates) {
+        finalChoice.innerHTML = finalChoice.innerHTML += `<option>${rate}</option>`
+      }
+    })
+})
+
 /* ------------------------------------------------------------------------------------------------------------------ */
-/*                        input to the url and pull in whichever thing for const and then pull                        */
+/*                               Event listener #2 for getting data to calculate result                               */
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-outputAmtDiv.classList.add('output')
 form.addEventListener('submit', function (event) {
   event.preventDefault()
 
@@ -75,10 +87,15 @@ form.addEventListener('submit', function (event) {
       console.log('hello my arrow function')
       const convertedAmount = parseFloat(amount.value * data.rates[newCurrency])
       const formattedAmount = parseFloat(convertedAmount.toFixed(2))
-      outputAmtDiv.innerHTML = formattedAmount
+      outputAmt.innerHTML = formattedAmount
       baseType.innerHTML = baseCurrency
       finalType.innerHTML = newCurrency
       footer.innerHTML = `Exchange Rates as of: ${data.date}`
       return data.repos_url
     })
 })
+
+// const outputAmtDiv = document.createElement('div')
+// document.querySelector('#holder').appendChild(outputAmtDiv)
+// outputAmtDiv.classList.add('output')
+// don't really need the above since created a "holder" div
