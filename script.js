@@ -45,6 +45,9 @@ const amount = document.querySelector('#base-amount')
 const outputAmtDiv = document.createElement('div')
 document.querySelector('#holder').appendChild(outputAmtDiv)
 
+const baseType = document.querySelector('#base-currency-type')
+const finalType = document.querySelector('#final-currency-type')
+const footer = document.querySelector('#footer-text')
 for (let currency of currencies) {
   baseChoice.innerHTML = baseChoice.innerHTML += `<option>${currency}</option>`
   finalChoice.innerHTML = finalChoice.innerHTML += ` <option>${currency}</option>`
@@ -72,7 +75,10 @@ form.addEventListener('submit', function (event) {
       console.log('hello my arrow function')
       const convertedAmount = parseFloat(amount.value * data.rates[newCurrency])
       const formattedAmount = parseFloat(convertedAmount.toFixed(2))
-      outputAmtDiv.innerHTML = formattedAmount + ` ${newCurrency}`
+      outputAmtDiv.innerHTML = formattedAmount
+      baseType.innerHTML = baseCurrency
+      finalType.innerHTML = newCurrency
+      footer.innerHTML = `Exchange Rates as of: ${data.date}`
       return data.repos_url
     })
 })

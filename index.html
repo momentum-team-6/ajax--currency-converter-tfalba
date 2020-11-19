@@ -17,6 +17,7 @@
             Base Currency
             <select id="base-choice" name="base"></select>
           </div>
+          <div class="text">to</div>
           <div class="input-field" id="final-currency">
             Final Currency
             <select id="final-choice" name="final"></select>         
@@ -24,22 +25,26 @@
         </div>
         <div class="row row2">
           <div class="output-field" id="base-amount-field">
-            <label for="currency amount">Amount to Convert</label>
+            <label for="currency amount">Amount</label>
             <input id="base-amount" type="text" required>
           </div>
+          <div class="output-field equals">=</div>
           <div class="output-field">
             Result
             <div id="holder">
-
             </div>
           </div>
           <div class="output-field">
             <button id="submit-button" type="submit">Convert</button>
           </div>
         </div>
+        <div class="row row3">
+          <div class="output-field" id="base-currency-type"></div>
+          <div class="output-field" id="final-currency-type"></div>
+        </div>
       </form>
   </div>
-  <footer>Exchange Rates as of: Insert Today's Date</footer>
+  <footer id="footer-text">Exchange Rates as of: Insert Today's Date</footer>
   
 </body>
 </html>
